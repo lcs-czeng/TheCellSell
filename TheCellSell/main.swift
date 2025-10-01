@@ -92,6 +92,12 @@ func calculateCost(dayMinutes: Int, nightMinutes: Int, weekendMinutes: Int, free
     return Double(cost) / 100.0
 }
 
+// Declaration of results
+
+let resultA = calculateCost(dayMinutes: dayTimeMinutes, nightMinutes: nightTimeMinutes, weekendMinutes: weekendTimeMinutes, freeTime: 100, weekendRate: 20, dayRate: 25, nightRate: 15)
+
+let resultB = calculateCost(dayMinutes: dayTimeMinutes, nightMinutes: nightTimeMinutes, weekendMinutes: weekendTimeMinutes, freeTime: 250, weekendRate: 25, dayRate: 45, nightRate: 35)
+
 
 // 3. Output
 print("Plan A costs \(resultA)")
