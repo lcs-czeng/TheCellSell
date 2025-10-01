@@ -108,3 +108,11 @@ let resultB = Double(b) / 100
 // 3. Output
 print("Plan A costs \(resultA)")
 print("Plan B costs \(resultB)")
+
+if resultA == resultB {
+    print("Plan A and B are the same price.")
+} else if resultA < resultB {
+    print("Plan A is cheapest.")
+} else {
+    print("Plan B is cheapest.")
+}
