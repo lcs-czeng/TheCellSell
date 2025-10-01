@@ -6,81 +6,69 @@
 //
 
 import Foundation
- 
+
 // 1. Input
  
-// Get number of daytime minutes
-var dayTimeMinutes = 251
-var nightTimeMinutes = 10
-var weekendTimeMinutes = 60
-
-while true {
-    
-    // Prompt
-    print("Number of daytime minutes?")
-    
-    // Collect input
-    guard let givenInput = readLine() else {
-        // Repeat prompt, no input given
-        continue
-    }
-    
-    // Convert to integer
-    guard let givenInteger = Int(givenInput) else {
-        // Repeat prompt, not an integer
-        continue
-    }
-    
-    // Now we have an integer, break input loop
-    dayTimeMinutes = givenInteger
-    break
+// Get daytime minutes
+let dayTimeMinutes = getInput(withPrompt: "Number of daytime minutes? ",
+                       minimum: 0,
+                       maximum: nil)
  
-}
-
-while true {
-    
-    // Prompt
-    print("Number of nighttime minutes?")
-    
-    // Collect input
-    guard let givenInput = readLine() else {
-        // Repeat prompt, no input given
-        continue
-    }
-    
-    // Convert to integer
-    guard let givenInteger = Int(givenInput) else {
-        // Repeat prompt, not an integer
-        continue
-    }
-    
-    // Now we have an integer, break input loop
-    nightTimeMinutes = givenInteger
-    break
+// Get evening minutes
+let nightTimeMinutes = getInput(withPrompt: "Number of evening minutes? ",
+                           minimum: 0,
+                           maximum: nil)
  
-}
+// Get weekend minutes
+let weekendMinutes = getInput(withPrompt: "Number of weekend minutes? ",
+                           minimum: 0,
+                           maximum: nil)
 
-while true {
+// Functions
+func getInput(withPrompt prompt: String, minimum: Int?, maximum: Int?) -> Int {
     
-    // Prompt
-    print("Number of weekend minutes?")
-    
-    // Collect input
-    guard let givenInput = readLine() else {
-        // Repeat prompt, no input given
-        continue
+    // Loop until a valid value is provided
+    while true {
+        
+        // Prompt the user
+        print(prompt)
+        
+        // Collect the input
+        guard let givenInput = readLine() else {
+            continue
+        }
+        
+        // Convert to an integer
+        guard let givenInteger = Int(givenInput) else {
+            continue
+        }
+        
+        // If a lowest value for the integer was specified...
+        if let minimumValue = minimum {
+            
+            // ... then check that the given integer is greater than or equal to the lowest desired value.
+            guard givenInteger >= minimumValue else {
+                continue
+            }
+            
+        }
+        
+        // If an highest possible value for the integer was specified...
+        if let maximumValue = maximum {
+            
+            // ... then check that the given integer is less than or equal to the highest desired value.
+            guard givenInteger <= maximumValue else {
+                continue
+            }
+            
+            
+        }
+        
+        // If we've made it past all the checks, the input is an integer in the desired range of values, so, return it
+        return givenInteger
+        
     }
     
-    // Convert to integer
-    guard let givenInteger = Int(givenInput) else {
-        // Repeat prompt, not an integer
-        continue
-    }
-    
-    // Now we have an integer, break input loop
-    weekendTimeMinutes = givenInteger
-    break
- 
 }
  
 // 2. Process
@@ -91,7 +79,7 @@ var a = 0
 // Add daytime cost
 a += max(dayTimeMinutes - 100, 0) * 25
 a += (nightTimeMinutes * 15)
-a += (weekendTimeMinutes * 20)
+a += (weekendMinutes * 20)
 
 let resultA = Double(a) / 100
 
@@ -101,7 +89,7 @@ var b = 0
 // Add daytime cost
 b += max(dayTimeMinutes - 250, 0) * 45
 b += nightTimeMinutes * 35
-b += weekendTimeMinutes * 25
+b += weekendMinutes * 25
 
 let resultB = Double(b) / 100
  
