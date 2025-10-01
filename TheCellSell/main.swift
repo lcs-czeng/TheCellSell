@@ -8,21 +8,27 @@
 import Foundation
 
 // 1. Input
- 
+
 // Get daytime minutes
-let dayTimeMinutes = getInput(withPrompt: "Number of daytime minutes? ",
-                       minimum: 0,
-                       maximum: nil)
- 
+let dayTimeMinutes = getInput(
+    withPrompt: "Number of daytime minutes? ",
+    minimum: 0,
+    maximum: nil
+)
+
 // Get evening minutes
-let nightTimeMinutes = getInput(withPrompt: "Number of evening minutes? ",
-                           minimum: 0,
-                           maximum: nil)
- 
+let nightTimeMinutes = getInput(
+    withPrompt: "Number of evening minutes? ",
+    minimum: 0,
+    maximum: nil
+)
+
 // Get weekend minutes
-let weekendMinutes = getInput(withPrompt: "Number of weekend minutes? ",
-                           minimum: 0,
-                           maximum: nil)
+let weekendTimeMinutes = getInput(
+    withPrompt: "Number of weekend minutes? ",
+    minimum: 0,
+    maximum: nil
+)
 
 // Functions
 func getInput(withPrompt prompt: String, minimum: Int?, maximum: Int?) -> Int {
@@ -70,29 +76,23 @@ func getInput(withPrompt prompt: String, minimum: Int?, maximum: Int?) -> Int {
     }
     
 }
- 
+
 // 2. Process
- 
-// Calculate costs for plan A
-var a = 0
- 
-// Add daytime cost
-a += max(dayTimeMinutes - 100, 0) * 25
-a += (nightTimeMinutes * 15)
-a += (weekendMinutes * 20)
 
-let resultA = Double(a) / 100
+// Function to calculate cost for a given plan
+func calculateCost(dayMinutes: Int, nightMinutes: Int, weekendMinutes: Int, freeTime: Int,
+                   weekendRate: Int, dayRate: Int, nightRate: Int) -> Double {
+    
+    var cost = 0
+    
+    cost += max(dayMinutes - freeTime, 0) * dayRate
+    cost += nightMinutes * nightRate
+    cost += weekendMinutes * weekendRate
+    
+    return Double(cost) / 100.0
+}
 
-// Calculate costs for plan B
-var b = 0
 
-// Add daytime cost
-b += max(dayTimeMinutes - 250, 0) * 45
-b += nightTimeMinutes * 35
-b += weekendMinutes * 25
-
-let resultB = Double(b) / 100
- 
 // 3. Output
 print("Plan A costs \(resultA)")
 print("Plan B costs \(resultB)")
