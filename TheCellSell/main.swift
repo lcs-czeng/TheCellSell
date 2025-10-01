@@ -89,7 +89,7 @@ while true {
 var a = 0
  
 // Add daytime cost
-a += (dayTimeMinutes - 100) * 25
+a += max(dayTimeMinutes - 100, 0) * 25
 a += (nightTimeMinutes * 15)
 a += (weekendTimeMinutes * 20)
 
@@ -99,7 +99,7 @@ let resultA = Double(a) / 100
 var b = 0
 
 // Add daytime cost
-b += (dayTimeMinutes - 250) * 45
+b += max(dayTimeMinutes - 250, 0) * 45
 b += nightTimeMinutes * 35
 b += weekendTimeMinutes * 25
 
