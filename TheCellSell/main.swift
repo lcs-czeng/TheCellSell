@@ -96,7 +96,15 @@ a += (weekendTimeMinutes * 20)
 let resultA = Double(a) / 100
 
 // Calculate costs for plan B
+var b = 0
+
+// Add daytime cost
+b += (dayTimeMinutes - 250) * 45
+b += nightTimeMinutes * 35
+b += weekendTimeMinutes * 25
+
+let resultB = Double(b) / 100
  
 // 3. Output
 print("Plan A costs \(resultA)")
- 
+print("Plan B costs \(resultB)")
